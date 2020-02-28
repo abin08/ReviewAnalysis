@@ -3,4 +3,4 @@ class Config(object):
     LOG_BACKUP_COUNT = 10
     MAX_LOG_BYTES = 1024
 
-    ML_DIR = 'ml'
+    ML_DIR = 'ml/models'

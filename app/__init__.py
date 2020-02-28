@@ -12,6 +12,9 @@ def create_app(config_class=Config):
     app = Flask(__name__)
     app.config.from_object(config_class)
 
+    from app.views import views_bp
+    app.register_blueprint(views_bp, url_prefix="/reviewAnalysis")
+
     if not os.path.exists(app.config[LOG_DIR]):
         os.mkdir(app.config[LOG_DIR])
     

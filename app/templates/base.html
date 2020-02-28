@@ -1,0 +1,14 @@
+<html>
+    <head>
+      {% if title %}
+      <title>{{ title }}</title>
+      {% else %}
+      <title>Review Sentiment Analysis</title>
+      {% endif %}
+    </head>
+    <body>
+        <div>Review Sentiment Analysis: <a href="/index">Home</a></div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>

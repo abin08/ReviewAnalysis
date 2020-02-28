@@ -1,16 +1,22 @@
 import os
 import pickle
-from flask import current_app, request, jsonify
+from flask import current_app, request, jsonify, render_template
 from app import create_app
 from app.views import views_bp
+from app.forms import ReivewTextForm
 
 ML_DIR = 'ML_DIR'
 SENTIMENT_MAP = {'Negative':0, 'Positive':1, 'Compliant':2}
 
+@views_bp.route("/")
+def index():
+    form = ReivewTextForm()
+    return render_template('review.html', form=form)
+
 @views_bp.route("/postReview", methods=['POST'])
 def post_review():
-    data = request.get_json()
-    review_text = data['reviewText']
+    # data = request.form['review_text']
+    review_text = request.form['review_text']
     model_file = os.path.join(current_app.config[ML_DIR], 'mnb_classifier.pickle')
     tfidf_file = os.path.join(current_app.config[ML_DIR], 'tfidf.pickle')
 

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Review Sentiment Analysis</h1>
+    <form action="" method="POST" novalidate>
+        {{ form.hidden_tag() }}
+        <p>
+            <textarea id="reviewText"></textarea>
+        </p>
+        <p>
+            <input type="button" value="Post" onclick="postReview()">
+        </p>
+        <p id="sentiment">            
+        </p>
+    </form>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+        function postReview(){
+            $.post('/reviewAnalysis/postReview', {
+                review_text: $('#reviewText').text
+            }).done(function(response){
+                $('#sentiment').text(response['sentiment'])
+            }).fail(function(){
+                $('#sentiment').text("Error")
+            });
+        }
+    </script>
+{% endblock %}
